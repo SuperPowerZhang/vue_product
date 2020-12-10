@@ -3,7 +3,7 @@
         <span class="pro-note-all">共{{num}}条记录</span>
         <span class="pro-note-select" >
             <select>
-                <option value="10">10</option>
+                <option :value="noteNumber"></option>
             </select>
             条/页
         </span>
@@ -17,6 +17,9 @@
             num:{
                 type:Number
             },
+            noteNumber: {
+                type:Number
+            }
 
         }
 

@@ -6,8 +6,8 @@
             </select>
             <input placeholder="搜索" v-model="searchItem" >
         </div>
-        <Products :products="productList"  test="1111"/>
-        <Notes :num="123"/>
+        <Products :products="productsDisplay"  test="1111"/>
+        <Notes :num="productListLength"  :noteNumber="noteNumber"/>
     </main>
 </template>
 
@@ -24,13 +24,18 @@
         },
         data(){
             const searchItem="";
-            return{searchItem}
+            const displayType="";
+            const noteNumber=10;
+            return{searchItem,displayType,noteNumber}
         },
-        // computed(){
-        //     productsDisplay(){
-        //         return productList.filter()
-        //     }
-        // }
+        computed:{
+            productsDisplay:function(props){
+                return props.productList
+            },
+            productListLength:function() {
+                return this.productsDisplay.length
+            }
+        }
     }
 </script>
 
