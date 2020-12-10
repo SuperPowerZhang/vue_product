@@ -1,10 +1,12 @@
 <template>
     <main>
         <div class="pro-list-head">
-            <select>
-                <option value="all">全部品类</option>
+<!--            v-model="displayType"-->
+            <select name="selectType" @change="modifyType($event)"  >
+                <option value="全部品类"  >全部品类</option>
+                <option :value="type" v-for="type in productTypeList" :key="type">{{type}}</option>
             </select>
-            <input placeholder="搜索" v-model="searchItem" >
+            <input placeholder="搜索"  @keyup.enter="modifySearchContent($event)">
         </div>
         <Products :products="productsDisplay"  test="1111"/>
         <Notes :num="productListLength"  :noteNumber="noteNumber"/>
@@ -23,17 +25,59 @@
             }
         },
         data(){
-            const searchItem="";
-            const displayType="";
+            const searchContent="";
+            const displayType="全部品类";
             const noteNumber=10;
-            return{searchItem,displayType,noteNumber}
+            return{searchContent,displayType,noteNumber}
         },
         computed:{
             productsDisplay:function(props){
-                return props.productList
+                return this.contentFilter(this.typeFilter(props.productList))
             },
             productListLength:function() {
                 return this.productsDisplay.length
+            },
+            productTypeList:function() {
+                let typeList=[];
+                this.productList.forEach((item)=>{
+                    if(typeList.indexOf(item.type)===-1){
+                        typeList.push(item.type)
+                    }
+                })
+                return  typeList
+            }
+        },
+        methods:{
+            modifyType:function (e) {
+                this.displayType=e.target.value
+            },
+            modifySearchContent:function(e){
+                this.searchContent=e.target.value
+                console.log(this.searchContent)
+            },
+            typeFilter:function(list){
+                if(this.displayType==="全部品类"){
+                    return   list
+                }else{
+                    return  list.filter((item)=>{
+                        return item.type===this.displayType
+                    })
+                }
+            },
+            contentFilter:function(list){
+                let listDisplay=[]
+                if(this.searchContent===""){
+                    listDisplay=list
+                }else{
+                    list.forEach((item)=>{
+                        for(let k in item){
+                            if(item[k]===this.searchContent){
+                                listDisplay.push(item)
+                            }
+                        }
+                    })
+                }
+                return listDisplay;
             }
         }
     }

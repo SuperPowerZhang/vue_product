@@ -41,25 +41,25 @@ export default {
     },{
       id:"0095",
       name:"电压力锅 一锅双胆 一键排压 精准控温 304不锈钢智...",
-      type:"电压力锅",
+      type:"电饭煲",
       size:"CYSB50YCW10DJ-100",
       entry:'5',
     },{
       id:"0094",
       name:"电压力锅 一锅双胆 一键排压 精准控温",
-      type:"电压力锅",
+      type:"电磁炉",
       size:"CYSB50YCW10DJ-100",
       entry:'5',
     },{
       id:"0093",
       name:"电压力锅 一锅双胆 一键排压 精准控温 304不锈钢智...",
-      type:"电压力锅",
+      type:"电饭煲",
       size:"CYSB50YCW10DJ-100",
       entry:'5',
     },{
       id:"0092",
       name:"电压力锅 一锅双胆 一键排压 精准控温",
-      type:"电压力锅",
+      type:"电磁炉",
       size:"CYSB50YCW10DJ-100",
       entry:'5',
     },{
@@ -86,13 +86,13 @@ export default {
         name:"电压力锅 一锅双胆 一键排压 精准控温",
         type:"电压力锅",
         size:"CYSB50YCW10DJ-100",
-        entry:'5',
+        entry:'4',
       },{
         id:"0087",
         name:"电压力锅 一锅双胆 一键排压 精准控温 304不锈钢智...",
         type:"电压力锅",
         size:"CYSB50YCW10DJ-100",
-        entry:'5',
+        entry:'4',
       },
     ]
     return {productList}
