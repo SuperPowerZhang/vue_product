@@ -5,52 +5,32 @@
                 <option value="all">全部品类</option>
             </select>
             <input placeholder="搜索" v-model="searchItem" >
-
         </div>
-        <div class="pro-list-body">
-            <ul>
-                <li class="pro-list-li pro-list-title">
-                    <span class="id">ID</span>
-                    <span class="name">产品名称</span>
-                    <span class="type">品类</span>
-                    <span class="size">型号</span>
-                    <span class="entry">功能入口</span>
-                    <span class="actions">操作xxx</span>
-                </li>
-                <li v-for="item in productList" :key="item.id">
-                    <span class="id">{{item.id}}</span>
-                    <span class="name"><a src="">{{item.name}}</a></span>
-                    <span class="type">{{item.type}}</span>
-                    <span class="size">{{item.size}}</span>
-                    <span class="entry">{{item.entry}}</span>
-                    <span class="actions">操作xxx</span>
-                </li>
-            </ul>
-        </div>
+        <Products :products="productList"  test="1111"/>
+        <Notes :num="123"/>
     </main>
 </template>
 
 <script>
+    import Products from "./Products";
+    import Notes from './Notes.vue'
     export default {
         name: "Main",
+        components: {Products,Notes},
+        props:{
+            productList:{
+                type:Array
+            }
+        },
         data(){
             const searchItem="";
-            const productList=[{
-                id:"0098",
-                name:"电压力锅 一锅双胆 一键排压 精准控温",
-                type:"电压力锅",
-                size:"CYSB50YCW10DJ-100",
-                entry:'5',
-            },{
-                id:"0097",
-                name:"电压力锅 一锅双胆 一键排压 精准控温 304不锈钢智...",
-                type:"电压力锅",
-                size:"CYSB50YCW10DJ-100",
-                entry:'5',
-            },
-            ]
-            return{searchItem,productList}
-        }
+            return{searchItem}
+        },
+        // computed(){
+        //     productsDisplay(){
+        //         return productList.filter()
+        //     }
+        // }
     }
 </script>
 
@@ -84,9 +64,9 @@
                 margin-left: 8px;
             }
         }
-        >.pro-list-body{
-            li{
-                border-top:1px solid rgb(241, 244, 246);
+         .pro-list-body{
+            li div{
+                border-bottom:1px solid rgb(241, 244, 246);
                 display: flex;
                 justify-content: space-between;
                 height: 36px;
@@ -97,7 +77,7 @@
                 >&.pro-list-title{
                         font-weight: 600;
                 }
-                >span{
+                span{
                     display: inline-block;
                     &.id{
                         width: 140px;
