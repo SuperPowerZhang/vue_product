@@ -8,7 +8,7 @@
                     <span class="type">品类</span>
                     <span class="size">型号</span>
                     <span class="entry">功能入口</span>
-                    <span class="actions">操作xxx</span>
+                    <span class="actions">操作</span>
                 </div>
             </li>
             <li v-for="item in products" :key="item.id">

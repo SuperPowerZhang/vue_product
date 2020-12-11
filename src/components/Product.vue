@@ -5,7 +5,7 @@
     <span class="type">{{item.type}}</span>
     <span class="size">{{item.size}}</span>
     <span class="entry">{{item.entry}}</span>
-    <span class="actions">操作xxx</span>
+    <span class="actions">x x x</span>
     </div>
 </template>
 
