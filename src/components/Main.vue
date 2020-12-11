@@ -8,17 +8,24 @@
             </select>
             <input placeholder="搜索"  @keyup.enter="modifySearchContent($event)">
         </div>
-        <Products :products="productsDisplay"  test="1111"/>
-        <Notes :num="productListLength"  :noteNumber="noteNumber"/>
+        <Products :products="products"  />
+        <div class="pro-note">
+            <span class="pro-note-all">共{{productListLength}}条记录，当前为1-x条</span>
+            <span class="pro-note-select" >
+            <select @change="modifyNumber($event)">
+                <option v-for="number in  numbers" :value="number" :key="number">{{number}}</option>
+            </select>
+            条/页，共{{pages}}页
+        </span>
+        </div>
     </main>
 </template>
 
 <script>
     import Products from "./Products";
-    import Notes from './Notes.vue'
     export default {
         name: "Main",
-        components: {Products,Notes},
+        components: {Products},
         props:{
             productList:{
                 type:Array
@@ -28,7 +35,10 @@
             const searchContent="";
             const displayType="全部品类";
             const noteNumber=10;
-            return{searchContent,displayType,noteNumber}
+            const numbers=[10,20,100];
+            const pageDisplay=1;
+            const productsComputed=[];
+            return{searchContent,displayType,noteNumber,numbers,pageDisplay,productsComputed}
         },
         computed:{
             productsDisplay:function(props){
@@ -36,6 +46,17 @@
             },
             productListLength:function() {
                 return this.productsDisplay.length
+            },
+            products:function(){
+                this.productsComputed=[]
+                     this.productsDisplay.forEach((item,index)=>{
+                        if(index<this.noteNumber){
+                            console.log(item)
+                            this.productsComputed.push(item)
+                        }
+                    })
+
+                return this.productsComputed
             },
             productTypeList:function() {
                 let typeList=[];
@@ -45,6 +66,9 @@
                     }
                 })
                 return  typeList
+            },
+            pages:function () {
+                return Math.ceil(this.productListLength/this.noteNumber)
             }
         },
         methods:{
@@ -54,6 +78,9 @@
             modifySearchContent:function(e){
                 this.searchContent=e.target.value
                 console.log(this.searchContent)
+            },
+            modifyNumber:function(e){
+                this.noteNumber=e.target.value
             },
             typeFilter:function(list){
                 if(this.displayType==="全部品类"){
@@ -113,65 +140,24 @@
                 margin-left: 8px;
             }
         }
-         .pro-list-body{
-            li div{
-                display: flex;
-                justify-content: flex-start;
-                border-bottom:1px solid rgb(241, 244, 246);
-                height: 36px;
-                line-height: 36px;
-                border-radius: 2px;
-                padding-left: 15px;
-                padding-right: 40px;
-                >&.pro-list-title{
-                        font-weight: 600;
-                    >.entry{
-                        text-align: center;
-                    }
-                }
-                span{
-                    display: inline-block;
-                    height: 35px;
-                    line-height: 35px;
-                    position: relative;
-                    margin-top: 0;
-                    &.id{
-                        /*position: absolute;*/
-                        /*top: 0;*/
-                        width: 140px;
-                        line-height: 35px;
-                    }
-                    /*1220-140*/
-                    &.name{
-                        width: 400px;
-                        white-space: nowrap;
-                        text-overflow:ellipsis;
-                        overflow:hidden;
-                        a{
-                            color:rgb(81, 169, 194);
-                            &:hover{
-                             cursor:pointer;
-                            }
-                        }
-                    }
-                    &.type{
-                        width: 175px;
-                    }
-                    &.size{
-                        width: 240px;
-                    }
-                    &.entry{
-                        width: 50px;
-                        text-align: right;
-                        margin-right: 120px;
-                    }
-                    &.actions{
-                        width: 40px;
-                    }
 
-                }
+        .pro-note{
+            display:flex;
+            justify-content: space-between;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 16px;
+            margin-right: 16px;
+            select{
+                width: 50px;
+                height: 25px;
+                color: rgb(125, 134, 142);
+                border: 1px solid rgb(222, 226, 230);
+
             }
+
         }
+
     }
 
 </style>

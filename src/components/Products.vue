@@ -29,9 +29,7 @@ import Product from './Product.vue'
             products:{
                 type:Array
             },
-            test:{
-                type:String
-            }
+
         }
     }
 </script>
